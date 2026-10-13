@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema de diseño — Leonardo Velázquez Corona</title>
+<meta name="description" content="Página de referencia visual del sistema de diseño: colores, tipografía, formas y componentes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#070545; --indigo:#1C1A52; --cream:#F2E3C8; --lavender:#7772BE;
+  --white:#FFFFFF; --ink:#17162B; --error:#E5484D; --success:#30A46C;
+  --overlay-dark:rgba(7,5,69,.72); --disabled-bg:rgba(119,114,190,.32); --disabled-text:rgba(255,255,255,.48);
+  --shadow-low:0 6px 18px rgba(0,0,0,.18); --shadow-high:0 18px 48px rgba(0,0,0,.28);
+  --r-btn:8px; --r-input:8px; --r-card:12px; --r-info:24px; --r-pill:999px;
+  --font-display:"Montserrat","Arial Narrow",sans-serif; --font-body:"Raleway",system-ui,sans-serif;
+  --ease:cubic-bezier(.2,0,0,1); --t-fast:120ms; --t-base:220ms; --t-section:420ms;
+  --max:1280px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--night);color:var(--white);font-family:var(--font-body);font-size:17px;line-height:1.6}
+a{color:var(--cream)}
+:focus-visible{outline:2px solid var(--lavender);outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:0;background:var(--cream);color:var(--night);padding:12px 24px;z-index:99;border-radius:0 0 8px 0;font-weight:700}
+.skip:focus{left:0}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+@media(max-width:1023px){.wrap{padding:0 24px}}
+@media(max-width:767px){.wrap{padding:0 16px}}
+/* Nav demo */
+.topbar{position:sticky;top:0;z-index:20;background:var(--night);border-bottom:1px solid rgba(242,227,200,.15)}
+.topbar .wrap{display:flex;align-items:center;gap:24px;min-height:64px}
+.brand{font-family:var(--font-display);font-weight:800;letter-spacing:.01em;color:var(--cream);text-transform:uppercase;text-decoration:none;font-size:18px;display:inline-flex;align-items:center;gap:12px;min-height:44px}
+.brand img{height:36px;width:auto;display:block;flex:none}
+nav.main{display:flex;gap:4px;margin-left:auto}
+nav.main a{color:var(--white);text-decoration:none;font-weight:600;font-size:16px;padding:10px 14px;border-radius:8px;min-height:44px;display:inline-flex;align-items:center}
+nav.main a[aria-current="page"]{color:var(--cream);box-shadow:inset 0 -2px 0 var(--cream)}
+nav.main a:hover{text-decoration:underline}
+.menu-btn{display:none;margin-left:auto;background:transparent;border:1px solid var(--cream);color:var(--cream);border-radius:8px;min-width:44px;min-height:44px;font-size:20px}
+@media(max-width:767px){nav.main{display:none}nav.main.open{display:flex;position:fixed;inset:0;background:var(--night);flex-direction:column;justify-content:center;align-items:center;gap:8px;font-size:24px}nav.main.open a{font-size:24px}.menu-btn{display:block}}
+/* Hero */
+.hero{padding:96px 0 64px;background:linear-gradient(rgba(7,5,69,.72),rgba(7,5,69,.45)),url("assets/imagenes/Fondo_feather.jpg") center/cover no-repeat,var(--night);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-40px;top:-40px;width:280px;height:280px;background:radial-gradient(circle,var(--cream) 1.5px,transparent 1.6px);background-size:18px 18px;opacity:.25;pointer-events:none}
+.kicker{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.12em;font-size:14px;color:var(--cream)}
+h1.display{font-family:var(--font-display);text-transform:uppercase;font-weight:800;color:var(--cream);line-height:1;font-size:clamp(48px,7vw,96px);margin:.3em 0 .2em;letter-spacing:.01em}
+.lede{max-width:62ch}
+section.block{padding:64px 0;border-top:1px solid rgba(242,227,200,.14)}
+h2.sec{font-family:var(--font-display);text-transform:uppercase;color:var(--cream);font-size:clamp(28px,4vw,44px);line-height:1.05;margin:0 0 8px}
+p.sub{color:var(--white);opacity:.9;max-width:70ch;margin:0 0 32px}
+.grid{display:grid;gap:24px}
+.g-colors{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.swatch{border-radius:var(--r-card);overflow:hidden;background:rgba(28,26,82,.5);border:1px solid rgba(242,227,200,.15)}
+.swatch .chip{height:110px}
+.swatch .meta{padding:16px}
+.swatch code{font-size:14px;opacity:.85}
+.swatch small{display:block;opacity:.85}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:2px 10px;border-radius:var(--r-pill);border:1px solid currentColor;margin-top:8px}
+.badge.ok{color:var(--success);border-color:var(--success)}
+.badge.warn{color:var(--cream);border-color:var(--cream)}
+/* Type */
+.type-demo{background:rgba(28,26,82,.5);border:1px solid rgba(242,227,200,.15);border-radius:var(--r-info);padding:32px}
+.type-demo .d1{font-family:var(--font-display);text-transform:uppercase;font-weight:800;color:var(--cream);font-size:clamp(48px,6vw,72px);line-height:1;margin:0 0 8px}
+.type-demo .d2{font-family:var(--font-display);font-weight:600;color:var(--cream);font-size:clamp(22px,3vw,32px);line-height:1.2;margin:0 0 8px}
+.type-demo .b{font-size:17px;max-width:62ch}
+.type-demo .c{font-size:14px;opacity:.85}
+.spec{font-size:14px;opacity:.8;margin-top:12px}
+/* Spacing / radii */
+.scale{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+.bar{background:var(--lavender);border-radius:4px 4px 0 0;min-width:48px;text-align:center;font-size:12px;padding-top:6px;color:var(--night);font-weight:700}
+.radios{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px}
+.radius-card{background:var(--cream);color:var(--night);padding:32px 16px;text-align:center;font-weight:700}
+.r8{border-radius:8px}.r12{border-radius:12px}.r24{border-radius:24px}.rpill{border-radius:999px}
+/* Elevation */
+.elev{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.elev div{background:var(--indigo);border-radius:12px;padding:32px 24px}
+.e-low{box-shadow:var(--shadow-low)}.e-high{box-shadow:var(--shadow-high)}.e-flat{border:1px solid rgba(242,227,200,.2)}
+/* Components */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 24px;border-radius:var(--r-btn);font-family:var(--font-body);font-weight:600;font-size:16px;cursor:pointer;border:1px solid transparent;text-decoration:none;transition:background var(--t-base) var(--ease),transform var(--t-base) var(--ease)}
+.btn-primary{background:var(--cream);color:var(--night)}
+.btn-primary:hover{background:var(--white);transform:translateY(-2px)}
+.btn-secondary{background:transparent;border-color:var(--cream);color:var(--cream)}
+.btn-secondary:hover{background:rgba(255,255,255,.12)}
+.btn[disabled]{background:var(--disabled-bg);color:var(--disabled-text);cursor:not-allowed;transform:none}
+.links a{margin-right:24px}
+.links .l1{color:var(--cream)}.links .l2{color:var(--white)}
+.links a:hover{text-decoration:underline}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.pcard{position:relative;background:rgba(28,26,82,.55);border-radius:var(--r-card);overflow:hidden;border:1px solid rgba(242,227,200,.15);transition:transform var(--t-base) var(--ease),background var(--t-base) var(--ease),border-color var(--t-base) var(--ease),box-shadow var(--t-base) var(--ease)}
+.pcard::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity var(--t-base) var(--ease);
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(242,227,200,.35),rgba(119,114,190,.18) 42%,transparent 65%)}
+.pcard:hover::before,.pcard:focus-within::before,.pcard.lit::before{opacity:1}
+.pcard:hover,.pcard:focus-within{background:rgba(255,255,255,.08);-webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%);border-color:rgba(242,227,200,.55);box-shadow:var(--shadow-high);transform:translateY(-2px)}
+.pcard .img{aspect-ratio:16/9;background:linear-gradient(135deg,var(--lavender),var(--indigo) 60%,var(--night));display:flex;align-items:center;justify-content:center;color:var(--cream);font-family:var(--font-display);text-transform:uppercase;transition:transform var(--t-base) var(--ease)}
+.pcard:hover .img{transform:scale(1.03)}
+.pcard .tx{padding:16px}
+.pcard .cat{font-size:14px;color:var(--cream);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+.pcard h3{margin:4px 0;font-family:var(--font-display);text-transform:uppercase;color:var(--white)}
+.pcard:hover h3{color:var(--cream)}
+form.demo{display:grid;gap:16px;max-width:520px}
+label{font-weight:600}
+input,textarea{background:#fff;color:var(--ink);border:2px solid transparent;border-radius:var(--r-input);min-height:48px;padding:14px 16px;font:inherit;width:100%}
+input:focus-visible,textarea:focus-visible{outline:none;border-color:var(--lavender)}
+.err{color:#fff;background:rgba(229,72,77,.15);border:1px solid var(--error);border-radius:8px;padding:12px 16px}
+.err::before{content:"⚠ ";font-weight:700}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:767px){.cols2{grid-template-columns:1fr}h1.display{font-size:48px}.hero{padding:64px 0 48px}section.block{padding:48px 0}}
+.dodonts{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:767px){.dodonts{grid-template-columns:1fr}}
+.do,.dont{border-radius:var(--r-info);padding:24px}
+.do{background:rgba(48,164,108,.12);border:1px solid var(--success)}
+.dont{background:rgba(229,72,77,.1);border:1px solid var(--error)}
+footer{padding:48px 0;color:var(--white);opacity:.9;border-top:1px solid rgba(242,227,200,.14)}
+.token{font-family:ui-monospace,monospace;font-size:.9em;background:rgba(255,255,255,.08);padding:1px 6px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+/* Cursor degradado lavanda -> crema (solo puntero fino) */
+#cursor{position:fixed;left:0;top:0;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:50%;
+  background:linear-gradient(135deg,var(--lavender),var(--cream));box-shadow:0 0 0 2px rgba(255,255,255,.35),0 4px 14px rgba(0,0,0,.35);
+  pointer-events:none;z-index:9999;opacity:0;transform:translate(-100px,-100px) scale(1);transition:opacity 160ms var(--ease),scale 160ms var(--ease)}
+#cursor.on{opacity:1}
+#cursor.down{scale:.8}
+#cursor.hovering{outline:2px solid var(--cream);outline-offset:2px}
+@media (pointer:fine){
+  body.custom-cursor, body.custom-cursor a, body.custom-cursor button, body.custom-cursor input, body.custom-cursor textarea, body.custom-cursor label{cursor:none}
+}
+@media (pointer:coarse){#cursor{display:none}}
+@media (prefers-reduced-motion:reduce){#cursor{display:none}.pcard:hover,.pcard:focus-within{transform:none}}
+/* Splash del logo: aparece al centro con círculo detrás, crece y se encoge */
+#logoSplash{position:fixed;inset:0;z-index:9998;display:flex;align-items:center;justify-content:center;pointer-events:none}
+#logoSplash[hidden]{display:none}
+#logoSplash .splash-circle{position:absolute;width:min(56vmin,340px);height:min(56vmin,340px);border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,var(--cream),var(--lavender) 55%,var(--indigo) 100%);opacity:.9}
+#logoSplash .splash-logo{position:relative;width:min(38vmin,220px);height:auto;filter:drop-shadow(0 10px 30px rgba(0,0,0,.5))}
+#logoSplash.play .splash-circle{animation:splashGrow 1.4s var(--ease) both}
+#logoSplash.play .splash-logo{animation:splashGrow 1.4s var(--ease) both}
+@keyframes splashGrow{
+  0%{transform:scale(.2);opacity:0}
+  30%{transform:scale(1.15);opacity:1}
+  60%{transform:scale(1)}
+  100%{transform:scale(.1);opacity:0}
+}
+@media (prefers-reduced-motion:reduce){#logoSplash{display:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Inicio — Leonardo Velázquez Corona"><img src="assets/imagenes/Logo_01.png" alt="Logotipo de Leonardo Velázquez Corona" width="36" height="36"></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menú">☰</button>
+    <nav class="main" id="mainNav" aria-label="Navegación principal">
+      <a href="#colores">Colores</a>
+      <a href="#tipografia" aria-current="page">Tipografía</a>
+      <a href="#componentes">Componentes</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+<div class="hero"><div class="wrap">
+  <p class="kicker">Sistema de diseño · Base editorial oscura</p>
+  <h1 class="display">Portafolio Leonardo</h1>
+  <p class="lede">Marco constante en <span class="token">{colors.night}</span> + <span class="token">{colors.indigo}</span>, titulares en <span class="token">{colors.cream}</span> e interactivos en <span class="token">{colors.lavender}</span>. Cada proyecto aporta su color dentro de su tarjeta, sin cambiar los controles globales.</p>
+  <p><a class="btn btn-primary" href="#componentes">Ver componentes</a> <a class="btn btn-secondary" href="#colores">Ver paleta</a></p>
+</div></div>
+
+<section class="block" id="colores" aria-labelledby="t-colores"><div class="wrap">
+  <h2 class="sec" id="t-colores">Colores</h2>
+  <p class="sub">Fondo principal azul noche, superficies índigo, acento crema y detalle lavanda. Texto blanco sobre oscuro y tinta sobre claro.</p>
+  <div class="grid g-colors">
+    <div class="swatch"><div class="chip" style="background:#070545;border-bottom:1px solid rgba(242,227,200,.2)"></div><div class="meta"><strong>Azul noche</strong><br><code>#070545 · {colors.night}</code><small>Fondo principal / marco</small><span class="badge ok">Blanco 18.8:1 ✓</span> <span class="badge ok">Crema 14.9:1 ✓</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#1C1A52"></div><div class="meta"><strong>Índigo</strong><br><code>#1C1A52 · {colors.indigo}</code><small>Degradados / fondos secundarios</small><span class="badge ok">Blanco 15.9:1 ✓</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#F2E3C8"></div><div class="meta"><strong>Crema</strong><br><code>#F2E3C8 · {colors.cream}</code><small>Títulos, botón primario, activos</small><span class="badge ok">Noche 14.9:1 ✓</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#7772BE"></div><div class="meta"><strong>Lavanda</strong><br><code>#7772BE · {colors.lavender}</code><small>Enlaces, foco, detalles</small><span class="badge warn">Sobre noche 4.4:1 — solo texto grande</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#FFFFFF"></div><div class="meta"><strong>Blanco</strong><br><code>#FFFFFF · {colors.white}</code><small>Texto sobre oscuro</small></div></div>
+    <div class="swatch"><div class="chip" style="background:#17162B"></div><div class="meta"><strong>Tinta</strong><br><code>#17162B · {colors.ink}</code><small>Lectura sobre claro</small><span class="badge ok">Sobre blanco 17.7:1 ✓</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#E5484D"></div><div class="meta"><strong>Error</strong><br><code>#E5484D</code><small>Solo texto+icono sobre claro</small><span class="badge warn">Blanco 3.9:1 — no usar como fondo</span></div></div>
+    <div class="swatch"><div class="chip" style="background:#30A46C"></div><div class="meta"><strong>Éxito</strong><br><code>#30A46C</code><small>Confirmaciones</small></div></div>
+  </div>
+</div></section>
+
+<section class="block" id="tipografia" aria-labelledby="t-tipo"><div class="wrap">
+  <h2 class="sec" id="t-tipo">Tipografía</h2>
+  <p class="sub">Titulares en Montserrat (mayúsculas, condensada) y lectura en Raleway. El cuerpo nunca baja de 16px.</p>
+  <div class="type-demo">
+    <p class="d1">Titular display 48–96px</p>
+    <p class="spec">Montserrat 700 · mayúsculas · interlineado 1.0 · <span class="token">{typography.display.color} = {colors.cream}</span></p>
+    <p class="d2">Subtítulo 22–32px para secciones secundarias</p>
+    <p class="b">Cuerpo Raleway 17px (16–18px) con interlineado 1.6. Blanco sobre fondos oscuros y tinta sobre fondos claros. Navegación y botones en Raleway 16px semibold.</p>
+    <p class="c">Caption 14px para metadatos y categorías.</p>
+  </div>
+</div></section>
+
+<section class="block" id="espaciado" aria-labelledby="t-esp"><div class="wrap">
+  <h2 class="sec" id="t-esp">Espaciado y retícula</h2>
+  <p class="sub">Escala <span class="token">4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 96 · 128px</span>. Contenedor máximo 1280px. Retícula 12 / 8 / 4 columnas, área táctil mínima 44px.</p>
+  <div class="scale" aria-hidden="true">
+    <div class="bar" style="height:24px">4</div><div class="bar" style="height:32px">8</div><div class="bar" style="height:40px">12</div><div class="bar" style="height:48px">16</div><div class="bar" style="height:60px">24</div><div class="bar" style="height:72px">32</div><div class="bar" style="height:88px">48</div><div class="bar" style="height:104px">64</div><div class="bar" style="height:128px">96</div><div class="bar" style="height:152px">128</div>
+  </div>
+</div></section>
+
+<section class="block" id="formas" aria-labelledby="t-form"><div class="wrap">
+  <h2 class="sec" id="t-form">Radios y formas</h2>
+  <p class="sub">Botones y campos 8px · tarjetas de proyecto 12px · tarjetas de información 24–28px. Firma gráfica: trama de puntos, ondas y destello solo en esquinas y transiciones.</p>
+  <div class="radios">
+    <div class="radius-card r8">8px<br><small>botones · inputs</small></div>
+    <div class="radius-card r12">12px<br><small>tarjeta proyecto</small></div>
+    <div class="radius-card r24">24px<br><small>tarjeta info</small></div>
+    <div class="radius-card rpill">999px<br><small>pill / chips</small></div>
+  </div>
+  <h3 style="font-family:var(--font-display);text-transform:uppercase;color:var(--cream)">Elevación</h3>
+  <div class="elev">
+    <div class="e-flat"><strong>Plana</strong><br><small>Tarjetas en reposo</small></div>
+    <div class="e-low"><strong>Baja</strong><br><code>0 6px 18px · 18%</code></div>
+    <div class="e-high"><strong>Alta</strong><br><code>0 18px 48px · 28%</code></div>
+  </div>
+</div></section>
+
+<section class="block" id="componentes" aria-labelledby="t-comp"><div class="wrap">
+  <h2 class="sec" id="t-comp">Componentes</h2>
+  <p class="sub">Todos con reposo, hover, foco visible, presión y deshabilitado. Movimiento: 120 / 220 / 420ms. Respeta <span class="token">prefers-reduced-motion</span>.</p>
+  <h3 style="font-family:var(--font-display);text-transform:uppercase;color:var(--cream)">Botones y enlaces</h3>
+  <p>
+    <button class="btn btn-primary" type="button">Botón primario</button>
+    <button class="btn btn-secondary" type="button">Botón secundario</button>
+    <button class="btn btn-primary" type="button" disabled>Deshabilitado</button>
+  </p>
+  <p class="links"><a class="l1" href="#componentes">Enlace crema con subrayado en hover</a><a class="l2" href="#componentes">Enlace blanco</a></p>
+  <h3 style="font-family:var(--font-display);text-transform:uppercase;color:var(--cream)">Tarjetas de proyecto</h3>
+  <div class="cards">
+    <article class="pcard"><div class="img" role="img" aria-label="Vista previa de proyecto editorial">Editorial</div><div class="tx"><p class="cat">Branding · 2026</p><h3>Caso ejemplo</h3><p>Imagen, categoría, nombre y descripción breve. En hover la imagen crece y el título pasa a crema.</p></div></article>
+    <article class="pcard"><div class="img" role="img" aria-label="Vista previa de proyecto fotográfico">Foto</div><div class="tx"><p class="cat">Fotografía</p><h3>Serie objeto</h3><p>El color propio del proyecto vive dentro de su tarjeta, no cambia los controles globales.</p></div></article>
+  </div>
+  <h3 style="font-family:var(--font-display);text-transform:uppercase;color:var(--cream)">Do's and Don'ts</h3>
+  <div class="dodonts" id="reglas" aria-label="Do's and Don'ts">
+    <div class="do"><h3>✓ Mantengo</h3><ul><li>Azul noche como marco</li><li>Títulos crema de gran escala</li><li>Jerarquía título → explicación → imagen</li><li>Recursos gráficos solo si dan ritmo</li></ul></div>
+    <div class="dont"><h3>✕ Evito</h3><ul><li>Todas las tramas a la vez</li><li>Textura detrás de párrafos</li><li>Condensada en textos largos</li><li>Color global nuevo por proyecto</li></ul></div>
+  </div>
+  <h3 id="contacto" style="font-family:var(--font-display);text-transform:uppercase;color:var(--cream}">Formulario</h3>
+  <div class="cols2">
+    <form class="demo" id="demoForm" novalidate>
+      <div><label for="nombre">Nombre</label><input id="nombre" name="nombre" type="text" autocomplete="name" required aria-describedby="err-nombre"><p class="err" id="err-nombre" hidden>Escribe tu nombre (texto + icono, no solo color).</p></div>
+      <div><label for="email">Correo</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+      <div><button class="btn btn-primary" type="submit">Enviar</button> <span id="okMsg" role="status"></span></div>
+    </form>
+    <div><p><strong>Foco:</strong> borde lavanda de 2px siempre visible para teclado.</p><p><strong>Error:</strong> texto + icono con <span class="token">{colors.error}</span>, nunca solo color.</p><p><strong>Toque:</strong> altura mínima 48px / área 44px.</p></div>
+  </div>
+</div></section>
+
+</main>
+<footer><div class="wrap"><small>Sistema de Diseño | Leonardo Velázquez Corona | 2026</small></div></footer>
+<div id="cursor" aria-hidden="true"></div>
+<div id="logoSplash" aria-hidden="true" hidden>
+  <div class="splash-circle"></div>
+  <img class="splash-logo" src="assets/imagenes/Logo_01.png" alt="">
+</div>
+<script>
+const yearEl = document.getElementById('year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
+const btn = document.getElementById('menuBtn'), nav = document.getElementById('mainNav');
+btn.addEventListener('click', () => {
+  const open = nav.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open);
+  btn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+});
+nav.addEventListener('click', e => {
+  const link = e.target.closest('a');
+  if (!link) return;
+  nav.querySelectorAll('a').forEach(a => a.removeAttribute('aria-current'));
+  link.setAttribute('aria-current', 'page');
+  nav.classList.remove('open'); btn.setAttribute('aria-expanded','false');
+});
+/* Cursor degradado: sigue al mouse solo en puntero fino y sin reduced-motion */
+const cursor = document.getElementById('cursor');
+const fine = matchMedia('(pointer:fine)').matches;
+const calm = matchMedia('(prefers-reduced-motion:reduce)').matches;
+if (fine && !calm && cursor) {
+  let x = -100, y = -100, tx = x, ty = y, shown = false, raf = 0;
+  const move = () => {
+    x += (tx - x) * 0.35; y += (ty - y) * 0.35;
+    cursor.style.transform = `translate(${x}px,${y}px)`;
+    if (Math.abs(tx - x) > 0.5 || Math.abs(ty - y) > 0.5) raf = requestAnimationFrame(move);
+    else raf = 0;
+  };
+  addEventListener('mousemove', e => {
+    tx = e.clientX; ty = e.clientY;
+    if (!shown) { shown = true; document.body.classList.add('custom-cursor'); cursor.classList.add('on'); }
+    if (!raf) raf = requestAnimationFrame(move);
+  }, { passive: true });
+  addEventListener('mousedown', () => cursor.classList.add('down'));
+  addEventListener('mouseup', () => cursor.classList.remove('down'));
+  document.addEventListener('mouseover', e => {
+    cursor.classList.toggle('hovering', !!e.target.closest('a,button,input,textarea,label'));
+  });
+  document.addEventListener('mouseleave', () => { shown = false; cursor.classList.remove('on'); document.body.classList.remove('custom-cursor'); });
+}
+/* Luz que sigue al mouse en cada tarjeta (cristal) */
+const calmMotion = matchMedia('(prefers-reduced-motion:reduce)').matches;
+if (!calmMotion) {
+  document.querySelectorAll('.pcard').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      card.classList.add('lit');
+    }, { passive: true });
+    card.addEventListener('mouseleave', () => card.classList.remove('lit'));
+  });
+}
+/* Splash del logo: centro + círculo, crece, se encoge y vuelve al inicio */
+const brand = document.querySelector('.brand');
+const splash = document.getElementById('logoSplash');
+function goHome() {
+  nav.querySelectorAll('a').forEach(a => a.removeAttribute('aria-current'));
+  scrollTo({ top: 0, behavior: calm ? 'auto' : 'smooth' });
+}
+if (brand && splash) {
+  brand.addEventListener('click', e => {
+    e.preventDefault();
+    if (calm) { goHome(); return; }
+    splash.hidden = false;
+    splash.classList.remove('play');
+    void splash.offsetWidth;
+    splash.classList.add('play');
+    const done = () => { splash.classList.remove('play'); splash.hidden = true; goHome(); };
+    splash.addEventListener('animationend', done, { once: true });
+    setTimeout(() => { if (!splash.hidden) done(); }, 1600);
+  });
+}
+const form = document.getElementById('demoForm');form.addEventListener('submit', e => {
+  e.preventDefault();
+  const name = document.getElementById('nombre'), err = document.getElementById('err-nombre'), ok = document.getElementById('okMsg');
+  if (!name.value.trim()) { err.hidden = false; name.setAttribute('aria-invalid','true'); name.focus(); ok.textContent=''; }
+  else { err.hidden = true; name.removeAttribute('aria-invalid'); ok.textContent='¡Gracias! Demostración de estado de éxito.'; }
+});
+</script>
+</body>
+</html>
